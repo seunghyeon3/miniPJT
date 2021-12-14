@@ -1,6 +1,6 @@
 package com.edu.VO;
 
-public class productVO {
+public class ProductVO {
 
 	//DB table column을 기준으로 작성
 	private String product_name;

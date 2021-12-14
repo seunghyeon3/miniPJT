@@ -2,11 +2,11 @@ package com.edu.dao;
 
 import java.sql.SQLException;
 
-import com.edu.VO.productVO;
+import com.edu.VO.ProductVO;
 
 public class productDAO extends DAO{
 	//한 건 입력 처리.
-	public productVO productInsert(productVO vo) {
+	public ProductVO productInsert(ProductVO vo) {
 		String sql = "insert into member values(?,?,?,?,?,?)";
 		connect();
 		try {

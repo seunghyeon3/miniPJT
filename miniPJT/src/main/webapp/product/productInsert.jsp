@@ -5,6 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>상품등록</title>
+<script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+<script>
+        document.addEventListener('DOMContentLoaded',function(){
+        	 CKEDITOR.replace('product_content', {
+        		 filebrowserUploadUrl: '../productServlet'
+             } );
+        })
+    </script>
 </head>
 <body>
     <fieldset>
