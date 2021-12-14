@@ -19,7 +19,7 @@ public class FrontController extends HttpServlet{
 	@Override
 	public void init() throws ServletException {
 		list = new HashMap<String, Controller>();
-		list.put("/productInsert.do", new ProductInsertController());
+		//list.put("/productInsert.do", new ProductInsertController());
 		
 		
 	}
