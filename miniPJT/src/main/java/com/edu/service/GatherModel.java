@@ -1,7 +1,7 @@
 package com.edu.service;
 
 
-
+import com.edu.VO.MemberVO;
 import com.edu.VO.ProductVO;
 import java.util.List;
 
@@ -45,6 +45,19 @@ public class GatherModel {
 	//2. comment(댓글) DAO 영역
 	
 	//3. member(멤버) DAO 영역
+	// 조회
+	public MemberVO SearchMember(String memberId) {
+		return mDAO.memberSearch(memberId);
+	}
+	// 입력.
+	public MemberVO insertMember(MemberVO vo) {
+		return mDAO.memberInsert(vo);
+		
+	}
+	// 수정
+	public MemberVO updateMember(MemberVO vo) { 
+		return mDAO.memberUpdate(vo);
+	}
 	
 	//4. product(상품) DAO 영역
 	public ProductVO insert(ProductVO vo) {
