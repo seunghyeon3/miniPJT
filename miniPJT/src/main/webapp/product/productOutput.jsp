@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:import url="../header.jsp"></c:import>
+<jsp:include page="../nav.jsp"></jsp:include>
 	<%
 	ProductVO vo = (ProductVO) request.getAttribute("product");
 	%>

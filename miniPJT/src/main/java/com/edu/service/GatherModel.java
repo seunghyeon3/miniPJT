@@ -60,7 +60,7 @@ public class GatherModel {
 	}
 	
 	//4. product(상품) DAO 영역
-	public ProductVO insert(ProductVO vo) {
+	public ProductVO insertProduct(ProductVO vo) {
 		return pDAO.productInsert(vo);
 		
 	}
