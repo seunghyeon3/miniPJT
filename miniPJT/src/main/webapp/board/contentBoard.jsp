@@ -13,16 +13,57 @@
 	<!-- web browser tab 명명하기 위함 -->
 	<script>
 	
-		function deleteBoard(event) {
+	$(document).ready(function () {
+		$.ajax({
+			method: 'get',
+			url:'../boardServlet',
+			data: {
+				cmd : 'comment'
+			},
+			dataType : 'json',
+			success : commentCall,
+			error : function(error){
+				console.log(error);
+			}
+		})
+
+		function commentCall(result){
+			//result 결과보고 comment 출력하면됨.
+			
+			//아래 내용 참고하여 작성하면됨.
+			//버튼 이벤트까지만 걸어주면끝
+
+			// let tbd = $('.showList');
+			// 	result.forEach(item => {
+			// 		let tr = $('<tr>').on("click", viewList).hover(function () {
+			// 			$(this).css('color', 'red');
+			// 		}, function () {
+			// 			$(this).css('color', 'black');
+			// 		});
+			// 		for (let field in item) {
+			// 			if (field != 'boardHeader') {
+			// 				let td = $('<td>').text(item[field])
+			// 				tr.append(td)
+			// 			}
+			// 		}
+			// 		tbd.append(tr);
+			// 	})
+
+		}
+		
+	});
+		function deleteBoard(boardId) {
 		}
 				$.ajax({
 				method: 'post',
 				url: '../boardServlet',
 				data : {
 					cmd : 'delete',
-					boardID : ${} 
+					boardId : boardId
 				},
-				success: successFnc,
+				success: function(){
+
+				},
 				error: function (error) {
 					console.log(error);
 				}
@@ -57,8 +98,13 @@
 	<input type="hidden" name='boardId' value=<%=vo.getBoardId()%>>
 	<textarea rows="30" cols="50" name='content'><%=vo.getBoardContent() %></textarea>
 	<input type='submit' value="수정">
-	<input type='button' value="삭제" onclick="deleteBoard">
+	<input type='button' value="삭제" onclick='deleteBoard("<%=vo.getBoardId()%>")'>
 	</form>
+
+	<div id="comment">
+		
+		
+		</div>
 
 
 

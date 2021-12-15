@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.edu.VO.BoardVO;
+import com.edu.VO.CommentVO;
 import com.edu.controller.Controller;
 import com.edu.service.GatherModel;
 import com.google.gson.Gson;
@@ -49,9 +49,18 @@ public class BoardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 전체 조회 기능
-		List<BoardVO> boardList = getBoard.getBoard();
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		response.getWriter().print(gson.toJson(boardList).toString());
+		String cmd = request.getParameter("cmd");
+		if(cmd.equals("comment")) {
+		//comment list 불러오는 DAO 해야함
+			List<CommentVO> commentList = getBoard.getComment();
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			response.getWriter().print(gson.toJson(commentList).toString());
+		}else {
+			List<BoardVO> boardList = getBoard.getBoard();
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			response.getWriter().print(gson.toJson(boardList).toString());
+		}
+		
 
 	}
 

@@ -90,7 +90,7 @@
 			</tbody>
 		</table>
 		<button onclick="location.href='insertBoard.jsp'">등록</button>
-	</div>
+	</div>	
 </body>
 
 </html>
