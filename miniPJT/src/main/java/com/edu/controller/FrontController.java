@@ -16,6 +16,7 @@ public class FrontController extends HttpServlet{
 	
 	HashMap<String, Controller> list = null;
 	
+	
 	//board, member 등 db 관련 servlet 제외 후 공통 기능 정의
 	//ex) login, main page 등
 	@Override
