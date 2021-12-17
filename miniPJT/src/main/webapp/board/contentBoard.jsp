@@ -25,7 +25,7 @@
 			error : function(error){
 				console.log(error);
 			}
-		})
+		});
 
 		function commentCall(result){
 			//result 결과보고 comment 출력하면됨.
@@ -94,11 +94,12 @@
 	</form>
 	<%} %> --%>
 	<input type='text' name='header' value=<%=vo.getBoardHeader() %>>
+	<!-- 아래 내용 세션으로 바꿔야함. -->
 	<input type='text' name='memberId' value=<%=vo.getMemberId() %> readonly>
 	<input type="hidden" name='boardId' value=<%=vo.getBoardId()%>>
 	<textarea rows="30" cols="50" name='content'><%=vo.getBoardContent() %></textarea>
 	<input type='submit' value="수정">
-	<input type='button' value="삭제" onclick='deleteBoard("<%=vo.getBoardId()%>")'>
+	<input type='button' value="삭제" id='delbtn' onclick='deleteBoard("<%=vo.getBoardId()%>")'>
 	</form>
 
 	<div id="comment">

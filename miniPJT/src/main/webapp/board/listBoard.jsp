@@ -19,6 +19,9 @@
 			$.ajax({
 				method: 'get',
 				url: '../boardServlet',
+				data:{
+					cmd:'select'
+				},
 				dataType: 'json',
 				success: successFnc,
 				error: function (error) {
