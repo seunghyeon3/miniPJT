@@ -1,4 +1,4 @@
-package com.edu.controller;
+package com.edu.CommentController;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.edu.controller.Controller;
 import com.edu.service.GatherModel;
 
 @WebServlet("/commnetServlet")
-public class CommnetServlet extends HttpServlet {
+public class CommentServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -22,7 +23,7 @@ public class CommnetServlet extends HttpServlet {
 	// 싱글톤(싱글톤 객체로 gatherModel 쓰면 됨)
 	GatherModel getBoard = GatherModel.getInstance();
 	
-    public CommnetServlet() {
+    public CommentServlet() {
         super();
     }
 

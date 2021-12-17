@@ -24,12 +24,12 @@ public class filter implements Filter {
 		
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/json;charset=utf-8");
 		
 		// pass the request along the filter chain, 위에 정의한 내용 실행, doFilter 아래에 정의하면 사용 못함.
 		chain.doFilter(request, response);
 	}
 	public void init(FilterConfig fConfig) throws ServletException {
-		System.out.println("init()");
 	}
 
 }

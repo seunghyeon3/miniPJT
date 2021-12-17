@@ -1,4 +1,4 @@
-package com.edu.controller;
+package com.edu.MemberController;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.edu.controller.Controller;
 import com.edu.service.GatherModel;
 
 @WebServlet("/memberServlet")

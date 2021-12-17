@@ -1,4 +1,4 @@
-package com.edu.controller;
+package com.edu.ProductController;
 
 import java.io.IOException;
 
@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.edu.VO.ProductVO;
+import com.edu.controller.Controller;
 import com.edu.service.GatherModel;
 
 public class ProductInsertController implements Controller {
@@ -29,7 +30,7 @@ public class ProductInsertController implements Controller {
 		vo.setProduct_picture(product_picture); //사진
 		vo.setProduct_price(product_price); //가격
 		
-		GatherModel.getInstance().insert(vo);
+		GatherModel.getInstance().insertProduct(vo);
 		req.setAttribute("product", vo);
 		
 		req.getRequestDispatcher("product/productOutput.jsp").forward(req, res);
