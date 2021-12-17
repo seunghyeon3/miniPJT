@@ -15,7 +15,6 @@ public class showBoardController implements Controller {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
-		System.out.println("왓슈?");
 		int data = Integer.parseInt(req.getParameter("no"));
 		
 		GatherModel getBoard = GatherModel.getInstance();

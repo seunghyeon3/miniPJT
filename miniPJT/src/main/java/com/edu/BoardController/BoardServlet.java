@@ -55,7 +55,7 @@ public class BoardServlet extends HttpServlet {
 			List<CommentVO> commentList = getBoard.getComment();
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			response.getWriter().print(gson.toJson(commentList).toString());
-		}else {
+		}else if(cmd.equals("select")){
 			List<BoardVO> boardList = getBoard.getBoard();
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			response.getWriter().print(gson.toJson(boardList).toString());
