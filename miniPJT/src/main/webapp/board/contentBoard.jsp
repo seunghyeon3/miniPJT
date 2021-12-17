@@ -29,7 +29,18 @@
 
 		function commentCall(result){
 			//result 결과보고 comment 출력하면됨.
-			
+			var comm = $('#showComm');
+
+			result.forEach(item => {
+				comm.append(
+				$('<div>').attr('id', item.commentID).append(
+				$('<input>').attr('type', 'hidden').val(item.memberId),
+				$('<input>').text(item.commentContent).attr('id', 'comm'),
+				$('<button>').val('수정').attr('click', modifyFnc),
+				$('<button>').val('수정').attr('click', deleteFnc)
+				)
+				);
+			});
 			//아래 내용 참고하여 작성하면됨.
 			//버튼 이벤트까지만 걸어주면끝
 
@@ -49,12 +60,19 @@
 			// 		tbd.append(tr);
 			// 	})
 
-		}
+		}		
+	});	
+
+	function modifyFnc(){
+
+	}
+
+	function deleteFnc(){
 		
-	});
-		function deleteBoard(boardId) {
-		}
-				$.ajax({
+	}
+
+	function deleteBoard(boardId) {
+		$.ajax({
 				method: 'post',
 				url: '../boardServlet',
 				data : {
@@ -62,12 +80,37 @@
 					boardId : boardId
 				},
 				success: function(){
-
+					location.href='../board/listBoard.jsp';
 				},
 				error: function (error) {
 					console.log(error);
 				}
-		}
+		})
+
+	}
+
+	function addComm(boardId){
+		$.ajax({
+			method:'post',
+			url:'',
+			data:{
+				cmd:'insert',
+				commdata :  $('#addComm').text(),
+				boardId :boardId
+			},
+			success : function(result){
+				// result에 retCode 추가 해보기
+				location.reload();
+			},
+			error:function(error){
+				console.log(error);
+			}
+
+		});
+
+	}
+
+
 	</script>
 	<title>lookBoard</title>
 
@@ -77,22 +120,7 @@
 	
 <% BoardVO vo = (BoardVO) request.getAttribute("boardData"); %>
 	<form action="../boardServlet/updateBoard.do" method="post">
-		<%-- 	<%if(vo.getMemberId().equals(session.getAttribute("member_id"))){
-		%>
-		<input type='text' name='header' value=<%=vo.getBoardHeader() %>>
-		<input type='text' value=<%=vo.getMemberId() %> readonly>
-		<textarea rows="30" cols="50" name='content' value=<%=vo.getBoardContent() %>></textarea>
-		<input type='submit' value="수정">
-		<input type='button' value="삭제" onclick="../boardServlet/insertBoard.do">
-	</form>
-	<%}
-	else{
-	%>
-	<input type='text' name='header' value=<%=vo.getBoardHeader() %> readonly>
-	<input type='text' value=<%=vo.getMemberId() %> readonly>
-	<textarea rows="30" cols="50" name='content' readonly><%=vo.getBoardContent() %> </textarea>
-	</form>
-	<%} %> --%>
+
 	<input type='text' name='header' value=<%=vo.getBoardHeader() %>>
 	<!-- 아래 내용 세션으로 바꿔야함. -->
 	<input type='text' name='memberId' value=<%=vo.getMemberId() %> readonly>
@@ -103,9 +131,13 @@
 	</form>
 
 	<div id="comment">
-		
-		
-		</div>
+		<input type="text" id="addComm">
+		<button onclick="addComm('<%=vo.getBoardId()%>')">+</button>
+	</div>
+
+	<div id="showComm">
+	
+	</div>
 
 
 

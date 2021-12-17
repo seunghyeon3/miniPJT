@@ -20,8 +20,11 @@ public class deleteBoardController implements Controller {
 		
 		
 		getBoard.deleteBoard(boardId);
+		System.out.println("delete넘어옴");
 		
-		res.sendRedirect("/miniPJT/board/listBoard.jsp");	
+		//req.getRequestDispatcher("/miniPJT/board/listBoard.jsp").forward(req, res);
+		
+		res.sendRedirect("/miniPJT/board/listBoard.jsp");
 		
 	}
 

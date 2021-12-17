@@ -38,7 +38,7 @@
 						$(this).css('color', 'black');
 					});
 					for (let field in item) {
-						if (field != 'boardHeader') {
+						if (field != 'boardContent') {
 							let td = $('<td>').text(item[field])
 							tr.append(td)
 						}
@@ -48,7 +48,7 @@
 
 			}
 
-			function viewList(event) {
+			function viewList() {
 				//여기서 데이터 조회 하고, jsp로 넘어가야함.
 				var form = $('<form>');
 				form.attr('action', '../boardServlet/showBoard.do');

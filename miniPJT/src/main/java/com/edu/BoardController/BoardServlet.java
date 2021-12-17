@@ -50,6 +50,9 @@ public class BoardServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// 전체 조회 기능
 		String cmd = request.getParameter("cmd");
+		if(cmd.equals(null)) {
+			cmd = "a";
+		}
 		if(cmd.equals("comment")) {
 		//comment list 불러오는 DAO 해야함
 			List<CommentVO> commentList = getBoard.getComment();
