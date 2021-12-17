@@ -32,6 +32,11 @@ public class ProductServlet extends HttpServlet {
 
 		super();
 	}
+	
+	@Override
+	public void init() throws ServletException {
+		list.put("/productServlet/productInsert.do", new ProductInsertController());
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -41,36 +46,41 @@ public class ProductServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// ckeditor 서버로 전송.
-		ServletContext context = getServletContext();
-		String saveUrl = context.getRealPath("upload");
-		System.out.println(saveUrl);
-		int maxSize = 30 * 1024 * 1024;
-		String encoding = "UTF-8";
-		
-		MultipartRequest mRequest = new MultipartRequest(request, 
-				saveUrl, // 저장위치
-				maxSize, // Max Size
-				encoding, // encoding 방식
-				new DefaultFileRenamePolicy() // 리네임정책
-				);
-		
-		Enumeration names = mRequest.getFileNames();
-		
-		while ( names.hasMoreElements()){
-			String name = (String)names.nextElement();
-			String fileName = mRequest.getFilesystemName(name);
-			
-			String fileUrl = request.getContextPath() + "/upload/" + fileName;
-			
-			System.out.println(fileUrl);
-			
-			JsonObject json = new JsonObject();
-			json.addProperty("uploaed", 1);
-			json.addProperty("fileName", fileName);
-			json.addProperty("url", fileUrl);
-			
-			response.setContentType("application/json;charset=UTF-8");
-			response.getWriter().print(json);
+		   ServletContext context = getServletContext();
+		      String saveUrl = context.getRealPath("upload");
+		      System.out.println(saveUrl);
+		      int maxSize = 30 * 1024 * 1024;
+		      String encoding = "UTF-8";
+		      
+		   
+		      MultipartRequest mRequest = new MultipartRequest(request, // 요청정보
+		            saveUrl, // 저장위치
+		            maxSize, // Max Size
+		            encoding, // encoding 방식
+		            new DefaultFileRenamePolicy() // 리네임정책
+		      );
+		      
+
+		      Enumeration names = mRequest.getFileNames();
+
+		      while (names.hasMoreElements()) {
+		         String name = (String)names.nextElement();
+		         String fileName = mRequest.getFilesystemName(name);
+		         
+		         String fileUrl = request.getContextPath() + "/upload/" + fileName;
+		         
+		         System.out.println(fileUrl);
+		         
+		         // ckditor 결과값을 반환.
+		         JsonObject json = new JsonObject();
+		         json.addProperty("upload", 1); // 성공 1 실패 0
+		         json.addProperty("fileName", fileName);
+		         json.addProperty("url", fileUrl);
+		         
+		         response.setContentType("application/json;charset=UTF-8");
+		         response.getWriter().print(json);
+		         
+		         
 			
 		}
 		

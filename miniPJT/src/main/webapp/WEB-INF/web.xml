@@ -26,6 +26,16 @@
 		<url-pattern>/boardServlet/*</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>ProductInsertController</servlet-name>
+		<servlet-class>com.edu.ProductController.ProductServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ProductInsertController</servlet-name>
+		<url-pattern>/productServlet/*</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>login/login.jsp</welcome-file>
 	</welcome-file-list>
