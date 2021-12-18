@@ -74,7 +74,8 @@ public class BoardServlet extends HttpServlet {
 		//uri : /miniPJT/boardServlet/insertBoard.do
 		//context : /miniPJT
 		
-		String cmd = req.getParameter("cmd");		
+		String cmd = req.getParameter("cmd");	
+		//cmd null일떄 예외처리 방식 재정의
 		if(cmd == null) {
 			cmd = "a";
 		}
