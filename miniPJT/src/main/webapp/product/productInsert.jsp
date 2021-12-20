@@ -12,8 +12,7 @@
 	<jsp:include page="../nav.jsp"></jsp:include>
 	<fieldset>
 		<legend> 상품등록 </legend>
-		<form action='../productServlet/productInsert.do' name="registerProduct"
-			enctype="multipart/form-data" method='post'>
+		<form action='../productServlet/productInsert.do' method='post'>
 			<!-- <form action='../productInsert.do' method='post'> -->
 			상품코드: <input type='text' name='product_id'><br> 
 			상품명: <input type='text' name='product_name'><br> 

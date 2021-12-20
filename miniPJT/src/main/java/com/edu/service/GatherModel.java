@@ -64,9 +64,23 @@ public class GatherModel {
 	}
 	
 	//4. product(상품) DAO 영역
+	
+	//상품입력
 	public ProductVO insertProduct(ProductVO vo) {
 		return pDAO.productInsert(vo);
-		
+	}
+	//상품리스트
+	public List<ProductVO> getProduct(){
+		return pDAO.getProduct();
+	}
+	//상품수정
+	public void updateProduct(ProductVO vo) {
+		//pDAO.updateProduct(vo);
+	}
+	
+	//상품삭제
+	public void deleteProduct(String id) {
+		//pDAO.deleteProduct(id);
 	}
 
 }
