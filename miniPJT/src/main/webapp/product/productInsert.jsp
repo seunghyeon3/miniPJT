@@ -12,7 +12,7 @@
 	<jsp:include page="../nav.jsp"></jsp:include>
 	<fieldset>
 		<legend> 상품등록 </legend>
-		<form action='../productInsert.do' name="registerProduct"
+		<form action='../productServlet/productInsert.do' name="registerProduct"
 			enctype="multipart/form-data" method='post'>
 			<!-- <form action='../productInsert.do' method='post'> -->
 			상품코드: <input type='text' name='product_id'><br> 
@@ -22,13 +22,7 @@
 			<!-- 이미지: <input type='text' name='pImage'><br>  -->
 			이미지: <input type='file' name='product_picture'><br> 
 			평점: <input	type="text" name='product_eval'><br> <input type='submit'value='등록'>
-
 		</form>
-
 	</fieldset>
-
-	
-	</script>
 </body>
-
 </html>
