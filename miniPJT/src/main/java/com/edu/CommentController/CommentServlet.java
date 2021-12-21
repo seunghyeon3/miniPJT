@@ -49,11 +49,11 @@ public class CommentServlet extends HttpServlet {
 		}
 		System.out.println(cmd);
 		if(cmd.equals("delete")) {
-			subCont = list.get("/boardServlet/deleteBoard.do");
+			subCont = list.get("/CommentServlet/deleteBoard.do");
 		}else if(cmd.equals("modify")) {
-			subCont = list.get("/boardServlet/deleteBoard.do");
+			subCont = list.get("/CommentServlet/deleteBoard.do");
 		}else if(cmd.equals("insert")) {
-			subCont = list.get("/boardServlet/insertComment.do");
+			subCont = list.get("/CommentServlet/insertComment.do");
 		}
 		
 		subCont.execute(req, res);

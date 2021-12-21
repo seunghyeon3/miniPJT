@@ -33,12 +33,8 @@ public class BoardServlet extends HttpServlet {
 	// 싱글톤(싱글톤 객체로 gatherModel 쓰면 됨)
 	GatherModel getBoard = GatherModel.getInstance();
 
-	public BoardServlet() {
-	}
-
 	@Override
 	public void init() throws ServletException {
-		System.out.println("요기요");
 		list = new HashMap<String, Controller>();
 		list.put("/boardServlet/insertBoard.do", new insertBoardController());
 		list.put("/boardServlet/showBoard.do", new showBoardController());

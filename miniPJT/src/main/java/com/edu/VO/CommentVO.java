@@ -30,6 +30,11 @@ public class CommentVO {
 	public void setBoardId(int boardId) {
 		this.boardId = boardId;
 	}
+	@Override
+	public String toString() {
+		return "CommentVO [commentId=" + commentId + ", commentContent=" + commentContent + ", memberId=" + memberId
+				+ ", boardId=" + boardId + "]";
+	}
 	
 	
 

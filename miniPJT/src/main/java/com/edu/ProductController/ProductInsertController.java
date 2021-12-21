@@ -17,7 +17,6 @@ public class ProductInsertController implements Controller {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-<<<<<<< HEAD
 		String saveUrl = req.getRealPath("/upload");
 		int maxSize = 30 * 1024 * 1024;
 		String encoding = "UTF-8";
@@ -30,16 +29,7 @@ public class ProductInsertController implements Controller {
 		String product_content = req.getParameter("product_content");
 		String product_id = req.getParameter("product_id");
 		String product_eval = req.getParameter("product_eval");
-
-=======
-		String product_name = req.getParameter("product_name");
-		int product_price = Integer.parseInt(req.getParameter("product_price"));
-		String product_picture = req.getParameter("product_picture");
-		String product_content = req.getParameter("product_content");
-		int product_id = Integer.parseInt(req.getParameter("product_id"));
-		double product_eval = Double.valueOf(req.getParameter("product_eval"));
 		
->>>>>>> 4f2639b949b4c36ad331cd6d9ea9d05770da506f
 		ProductVO vo = new ProductVO();
 		vo.setProduct_id(product_id); // 상품아이디
 		vo.setProduct_content(product_content); // 상품설명
@@ -49,13 +39,11 @@ public class ProductInsertController implements Controller {
 		vo.setProduct_price(product_price); // 가격
 
 		GatherModel.getInstance().insertProduct(vo);
-<<<<<<< HEAD
 		req.setAttribute("product", vo);
 
 		req.getRequestDispatcher("product/productOutput.jsp").forward(req, res);
 		
 
-=======
 		
 		
 		/*
@@ -64,7 +52,6 @@ public class ProductInsertController implements Controller {
 		 */
 		
 		res.sendRedirect("../product/productMain.jsp");
->>>>>>> 4f2639b949b4c36ad331cd6d9ea9d05770da506f
 	}
 
 }

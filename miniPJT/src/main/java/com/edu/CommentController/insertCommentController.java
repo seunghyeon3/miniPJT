@@ -5,10 +5,9 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-<<<<<<< HEAD
+
 
 import com.edu.controller.Controller;
-=======
 import javax.servlet.http.HttpSession;
 
 import com.edu.VO.CommentVO;
@@ -28,11 +27,14 @@ public class insertCommentController implements Controller {
 		CommentVO vo = new CommentVO();
 		vo.setCommentContent(commData);
 		vo.setBoardId(boardId);
-		vo.setMemberId((String)session.getAttribute("member_id"));
+		//테스트용
+		vo.setMemberId("A");
+		//vo.setMemberId((String)session.getAttribute("member_id"));
 		GatherModel getModel = GatherModel.getInstance();
 		getModel.insertComment(vo);
 		
-		res.sendRedirect("miniPJT/board/contentBoard.jsp");
+		res.sendRedirect("../board/contentBoard.jsp");
+		//req.getRequestDispatcher("../board/contentBoard.jsp").forward(req, res);
 	}
 
 }

@@ -39,18 +39,18 @@ public class CommentDAO extends DAO{
 	//입력
 	public void insertComment(CommentVO vo) {
 		String sql = "insert into comments values(?,?,?,?)";
-		String selectSql = "select max(comment_id) from comments";
+		String selectSql = "select max(comment_id) from comments where board_id = ?";
 		int count = 0;
 		connect();
 		
 		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(selectSql);
+			psmt = conn.prepareStatement(selectSql);
+			psmt.setInt(1, vo.getBoardId());
+			rs = psmt.executeQuery();
 			if(rs.next()) {
 				count = rs.getInt(1)+1;
-				
 			}
-			
+			System.out.println(vo);
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, count);
 			psmt.setString(2, vo.getCommentContent());
