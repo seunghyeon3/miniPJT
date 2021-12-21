@@ -36,10 +36,12 @@ public class BoardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 전체 조회 기능
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// 단건 조회
 		// 입력
 		// 수정
