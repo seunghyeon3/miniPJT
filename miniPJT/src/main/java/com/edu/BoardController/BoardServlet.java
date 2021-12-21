@@ -89,6 +89,7 @@ public class BoardServlet extends HttpServlet {
 		
 		
 		int toPos = uri.indexOf(".do");
+		
 		Controller subCont = null;
 		if(toPos > 0) {
 			String path = uri.substring(context.length(), toPos + 3);

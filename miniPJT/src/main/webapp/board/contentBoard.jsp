@@ -29,14 +29,25 @@
 			function commentCall(result) {
 				//result 결과보고 comment 출력하면됨.
 				var comm = $('#showComm');
-				if (result != null) {
+				if (result != null  && (item.memberId == sessionStorage.getItem("member_Id") ) ) {
 					result.forEach(item => {
 						comm.append(
 							$('<div>').attr('id', item.commentID).append(
 								$('<input>').attr('type', 'hidden').val(item.memberId),
-								$('<input>').text(item.commentContent).attr('id', 'comm'),
+								$('<input>').text(item.commentContent),
 								$('<button>').val('수정').attr('click', modifyFnc),
 								$('<button>').val('삭제').attr('click', deleteFnc)
+							)
+						);
+					});
+				}else if(result != null  && (item.memberId != sessionStorage.getItem("member_Id") )){
+					result.forEach(item => {
+						comm.append(
+							$('<div>').attr('id', item.commentID).append(
+								$('<input>').attr('type', 'hidden').val(item.memberId),
+								$('<input>').text(item.commentContent),
+								$('<button>').val('수정').attr('click', modifyFnc).hide(),
+								$('<button>').val('삭제').attr('click', deleteFnc).hide()
 							)
 						);
 					});
@@ -140,7 +151,6 @@
 	</div>
 	<hr>
 	<div id="showComm">
-
 	</div>
 
 
