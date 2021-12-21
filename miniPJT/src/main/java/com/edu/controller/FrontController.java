@@ -8,11 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.edu.ProductController.ProductInsertController;
+import com.edu.service.GatherModel;
+
 
 
 public class FrontController extends HttpServlet{
 	
 	HashMap<String, Controller> list = null;
+	
 	
 	//board, member 등 db 관련 servlet 제외 후 공통 기능 정의
 	//ex) login, main page 등
@@ -20,7 +24,10 @@ public class FrontController extends HttpServlet{
 	public void init() throws ServletException {
 		list = new HashMap<String, Controller>();
 		//list.put("/productInsert.do", new ProductInsertController());
-		
+
+		list.put("logout.do", new logoutController());
+		list.put("mypage.do", new mypageController());
+
 		
 	}
 	

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-	<!-- jstl사용을 위해 추가 -->
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	
+
+<!-- jstl사용을 위해 추가 -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,14 +14,14 @@
 <title>InsertBoard</title>
 </head>
 <body>
-<!-- menu 추가..JSTL 방식 -->
-<c:import url="../css/menu.jsp"></c:import>
-
-<!-- nav 추가..JSP 액션태그 방식 -->
-<jsp:include page ="../css/nav.jsp">
-
-<!-- footer 추가 -->
-<c:import url="../css/footer.jsp"></c:import>
-
+	<c:import url="../header.jsp"></c:import>
+	<jsp:include page="../nav.jsp"></jsp:include>
+	<form action="../boardServlet/insertBoard.do" method="post">
+		<input type='text' name='header'>
+		<input type='text' value=<%=session.getAttribute("member_id")%>  readonly>
+		<textarea rows="30" cols="50" name='content'  placeholder="글자수는 100자 내로 쓰소."></textarea>
+		<input type='submit' value="등록">
+		<input type='reset' value="취소">
+	</form>
 </body>
 </html>

@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.edu.controller.Controller;
+<<<<<<< HEAD
 import com.edu.controller.LoginController;
 import com.edu.controller.logoutController;
+=======
+>>>>>>> 4f2639b949b4c36ad331cd6d9ea9d05770da506f
 import com.edu.service.GatherModel;
 
 @WebServlet("/memberServlet")
@@ -27,6 +30,7 @@ public class MemberServlet extends HttpServlet {
 	
        
     public MemberServlet() {
+<<<<<<< HEAD
       super();
     }
     @Override
@@ -61,6 +65,12 @@ public class MemberServlet extends HttpServlet {
 	
 		
 		
+=======
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+>>>>>>> 4f2639b949b4c36ad331cd6d9ea9d05770da506f
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

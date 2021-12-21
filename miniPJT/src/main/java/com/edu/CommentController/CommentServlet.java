@@ -31,6 +31,9 @@ public class CommentServlet extends HttpServlet {
     	list = new HashMap<String, Controller>();
     	
     	list.put("/CommentServlet/insertComment.do", new insertCommentController());
+    	list.put("/CommentServlet/deleteComment.do", new deleteCommentController());
+    	list.put("/CommentServlet/modifyComment.do", new updateCommentController());
+
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
@@ -38,35 +41,19 @@ public class CommentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
 		String cmd = req.getParameter("cmd");
+		Controller subCont = null;
+
 		//cmd null일떄 예외처리 방식 재정의
 		if(cmd == null) {
 			cmd = "a";
 		}
-		String uri = req.getRequestURI();
-		System.out.println(uri);
-		String context = req.getContextPath();
-		System.out.println(context);
-		
-		String temp = req.getParameter("writer");
-		System.out.println(temp);
-		
-		
-		int toPos = uri.indexOf(".do");
-		Controller subCont = null;
-		if(toPos > 0) {
-			String path = uri.substring(context.length(), toPos + 3);
-			System.out.println(path);
-			subCont = list.get(path);
-		}else {
-			String path = uri.substring(context.length());
-			System.out.println(path);
-			subCont = list.get(path);
-		}
-		
-		//String path2 = uri.substring(context.length()); 동일함		
 		System.out.println(cmd);
 		if(cmd.equals("delete")) {
 			subCont = list.get("/boardServlet/deleteBoard.do");
+		}else if(cmd.equals("modify")) {
+			subCont = list.get("/boardServlet/deleteBoard.do");
+		}else if(cmd.equals("insert")) {
+			subCont = list.get("/boardServlet/insertComment.do");
 		}
 		
 		subCont.execute(req, res);
