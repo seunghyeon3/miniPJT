@@ -36,7 +36,7 @@ public class ProductInsertController implements Controller {
 		GatherModel.getInstance().insertProduct(vo);
 		req.setAttribute("product", vo);
 
-		req.getRequestDispatcher("../product/productOutput.jsp").forward(req, res);
+		req.getRequestDispatcher("../product/productMain.jsp").forward(req, res);
 
 	}
 
