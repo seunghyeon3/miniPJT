@@ -23,7 +23,6 @@ public class ProductInsertController implements Controller {
 		String product_content = req.getParameter("product_content");
 		int product_id = Integer.parseInt(req.getParameter("product_id"));
 		double product_eval = Double.valueOf(req.getParameter("product_eval"));
-
 		
 		ProductVO vo = new ProductVO();
 		vo.setProduct_id(product_id); // 상품아이디
@@ -34,10 +33,14 @@ public class ProductInsertController implements Controller {
 		vo.setProduct_price(product_price); // 가격
 
 		GatherModel.getInstance().insertProduct(vo);
-		req.setAttribute("product", vo);
-
-		req.getRequestDispatcher("../product/productMain.jsp").forward(req, res);
-
+		
+		
+		/*
+		 * req.setAttribute("product", vo);
+		 * req.getRequestDispatcher("../product/productMain.jsp").forward(req, res);
+		 */
+		
+		res.sendRedirect("../product/productMain.jsp");
 	}
 
 }

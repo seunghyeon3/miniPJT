@@ -16,7 +16,7 @@
 			<!-- <form action='../productInsert.do' method='post'> -->
 			상품코드: <input type='text' name='product_id'><br> 
 			상품명: <input type='text' name='product_name'><br> 
-			판매가: <input type="number"	name='product_price'><br> 
+			상품가격: <input type="number"	name='product_price'><br> 
 			상품설명: <input type='text'	name='product_content'><br>
 			<!-- 이미지: <input type='text' name='pImage'><br>  -->
 			이미지: <input type='file' name='product_picture'><br> 

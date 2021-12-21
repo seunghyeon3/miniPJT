@@ -60,6 +60,7 @@ public class ProductServlet extends HttpServlet {
 		if(cmd.equals("productList")) {
 		//상품리스트를 불러오는 DAO
 			List<ProductVO> productList =  getProduct.getProduct();
+			System.out.println(productList);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			response.getWriter().print(gson.toJson(productList).toString());
 		}
@@ -93,7 +94,7 @@ public class ProductServlet extends HttpServlet {
 		//String path2 = uri.substring(context.length()); 동일함		
 		subCont.execute(request, response);
 		         
-			
+		
 		}
 		
 
