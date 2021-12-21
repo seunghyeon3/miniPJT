@@ -48,6 +48,18 @@ public class GatherModel {
 		return cDAO.getComment();
 	}
 	
+	public void insertComment(CommentVO vo) {
+		cDAO.insertComment(vo);
+	}
+	
+	public void updateComment(CommentVO vo) {
+		cDAO.updateComment(vo);
+	}
+	
+	public void deleteComment(int id) {
+		cDAO.deleteComment(id);
+	}
+	
 	//3. member(멤버) DAO 영역
 	// 조회
 	public MemberVO SearchMember(String memberId) {

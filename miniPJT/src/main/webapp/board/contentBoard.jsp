@@ -46,8 +46,8 @@
 							$('<div>').attr('id', item.commentID).append(
 								$('<input>').attr('type', 'hidden').val(item.memberId),
 								$('<input>').text(item.commentContent),
-								$('<button>').val('수정').attr('click', modifyFnc).hide(),
-								$('<button>').val('삭제').attr('click', deleteFnc).hide()
+								$('<button>').val('수정').attr('click', modifyCommFnc).hide(),
+								$('<button>').val('삭제').attr('click', deleteCommFnc).hide()
 							)
 						);
 					});
@@ -79,12 +79,47 @@
 			}
 		});
 
-		function modifyFnc() {
-
+		function modifyCommFnc(event) {
+			console.log(event.target.parentNode);
+			let commentId = event.target.parentNode.textContent;
+			let commentValue = event.target.parentNode.children[2].textContent;
+			let boardID = $('#board').val();
+			$.ajax({
+				method:'post',
+				url:'../CommentServlet',
+				data:{
+					cmd:'modify',
+					commId:commentId,
+					commVal : commentValue,
+					boardId:boardID
+				},
+				success:function(){
+					console.log("수정완료");
+					location.reload();
+				},
+				error:function(){
+					conosle.log(error);
+				}
+			})
 		}
 
-		function deleteFnc() {
-
+		function deleteCommFnc(event) {
+			let commentId = event.target.parentNode.textContent;
+			$.ajax({
+				method:'post',
+				url:'../CommentServlet',
+				data:{
+					cmd:'delete',
+					commId:commentId
+				},
+				success:function(){
+					console.log("삭제완료");
+					event.target.parentNode.remove();
+				},
+				error:function(){
+					conosle.log(error);
+				}
+			})
 		}
 
 		function deleteBoard(boardId) {
@@ -97,7 +132,7 @@
 				},
 				success: function () {
 					location.href = '../board/listBoard.jsp';
-				},
+				},  
 				error: function (error) {
 					console.log(error);
 				}
@@ -108,7 +143,7 @@
 		function addComm(boardId) {
 			$.ajax({
 				method: 'post',
-				url: '../CommentServlet/insertComment.do',
+				url: '../CommentServlet',
 				data: {
 					cmd: 'insert',
 					commdata: $('#addComm').text(),
@@ -138,7 +173,7 @@
 		<input type='text' name='header' value=<%=vo.getBoardHeader() %>>
 		<!-- 아래 내용 세션으로 바꿔야함. -->
 		<input type='text' name='memberId' value=<%=vo.getMemberId() %> readonly>
-		<input type="hidden" name='boardId' value=<%=vo.getBoardId()%>>
+		<input type="hidden" name='boardId' id='board' value=<%=vo.getBoardId()%>>
 		<textarea rows="30" cols="50" name='content'><%=vo.getBoardContent() %></textarea>
 		<input type='submit' value="수정">
 		<input type='button' value="삭제" id='delbtn' onclick='deleteBoard("<%=vo.getBoardId()%>")'>

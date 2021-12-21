@@ -29,6 +29,7 @@ public class insertBoardController implements Controller {
 		vo.setMemberId(id);
 		getModel.insertBoard(vo);
 		
+		
 		res.sendRedirect("/miniPJT/board/listBoard.jsp");
 		
 	}

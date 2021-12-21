@@ -31,7 +31,6 @@ public class FrontController extends HttpServlet{
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		String url = req.getRequestURI();
 		String context = req.getContextPath(); 
 		String path = url.substring(context.length()); 

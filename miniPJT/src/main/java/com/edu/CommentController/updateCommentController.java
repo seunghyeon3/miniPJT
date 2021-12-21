@@ -11,22 +11,26 @@ import com.edu.VO.CommentVO;
 import com.edu.controller.Controller;
 import com.edu.service.GatherModel;
 
-public class insertCommentController implements Controller {
+public class updateCommentController implements Controller {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String commData = req.getParameter("commdata");
+		
+		int commId = Integer.parseInt(req.getParameter("commId"));
+		String commVal = req.getParameter("commVal");
 		int boardId = Integer.parseInt(req.getParameter("boardId"));
 		HttpSession session = req.getSession();
-		
+		GatherModel getModel = GatherModel.getInstance();
 		CommentVO vo = new CommentVO();
-		vo.setCommentContent(commData);
+		
+		vo.setCommentId(commId);
+		vo.setCommentContent(commVal);
 		vo.setBoardId(boardId);
 		vo.setMemberId((String)session.getAttribute("member_id"));
-		GatherModel getModel = GatherModel.getInstance();
-		getModel.insertComment(vo);
+		getModel.updateComment(vo);
 		
 		res.sendRedirect("miniPJT/board/contentBoard.jsp");
+		
 	}
 
 }
