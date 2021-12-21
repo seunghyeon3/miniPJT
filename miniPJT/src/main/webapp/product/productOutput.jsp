@@ -27,7 +27,7 @@
 	</h3>
 	<h3>
 		상품설명 :
-		<%=vo.getProduct_content()%>>
+		<%=vo.getProduct_content()%>
 	</h3>
 	<h3>
 		상품별점 :
