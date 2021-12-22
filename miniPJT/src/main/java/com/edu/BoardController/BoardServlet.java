@@ -46,6 +46,7 @@ public class BoardServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// 전체 조회 기능
 		String cmd = request.getParameter("cmd");
+		System.out.println(cmd);
 		if(cmd.equals(null)) {
 			cmd = "a";
 		}
@@ -79,7 +80,6 @@ public class BoardServlet extends HttpServlet {
 		String context = req.getContextPath();
 		
 		String temp = req.getParameter("writer");
-		System.out.println(temp);
 		
 		
 		int toPos = uri.indexOf(".do");

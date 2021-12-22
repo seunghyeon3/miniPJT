@@ -18,7 +18,7 @@
 				url: '../CommentServlet',
 				data: {
 					cmd: 'comment',
-					boardId : $('#board').val()
+					boardId: $('#board').val()
 				},
 				success: commentCall,
 				error: function (error) {
@@ -56,15 +56,15 @@
 						// }
 						if ($('#board').val() == item.boardId) {
 							comm.append(
-								$('<div>').attr('id', item.commentId).append(
-									$('<input>').attr({
-										type: 'hidden',
-										id: 'memberid'
-									}).val(item.memberId),
+								$('<div>').append(
 									$('<input>').attr({
 										type: 'hidden',
 										id: 'boardid'
 									}).val(item.boardId),
+									$('<input>').attr({
+										type: 'hidden',
+										id: 'commentId'
+									}).val(item.commentId),
 									$('<input>').val(item.commentContent),
 									$('<button>').text('수정').click(modifyCommFnc),
 									$('<button>').text('삭제').click(deleteCommFnc)
@@ -98,44 +98,48 @@
 
 		});
 
-		function modifyCommFnc(event) {
+		function modifyCommFnc(e) {
 			//수정중
-			console.log(document.querySelector("#\\31  > input:nth-child(3)").textContent);
-			//let commentValue = document.querySelector("#\\31  > input:nth-child(3)").textContent;
-			let boardID = $('#board').val();
+			console.log(e.target.parentNode.children[0].value); //boardid
+			console.log(e.target.parentNode.children[1].value); //commentId
+			console.log(e.target.parentNode.children[2].value); //commentContent
+
 			$.ajax({
 				method: 'post',
 				url: '../CommentServlet',
 				data: {
 					cmd: 'modify',
-					commId: commentNo,
-					commVal: commentValue,
-					boardId: boardID
+					commId: e.target.parentNode.children[1].value,
+					commVal: e.target.parentNode.children[2].value,
+					boardId: e.target.parentNode.children[0].value
 				},
 				success: function () {
 					console.log("수정완료");
 					location.reload();
 				},
-				error: function () {
-					conosle.log(error);
+				error: function (request, status, error) {
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" +
+						error);
 				}
 			})
 		}
 
-		function deleteCommFnc(commentNo) {
+		function deleteCommFnc(e) {
 			$.ajax({
 				method: 'post',
 				url: '../CommentServlet',
 				data: {
 					cmd: 'delete',
-					commId: commentNo
+					commId: e.target.parentNode.children[1].value,
+					boardId: e.target.parentNode.children[0].value
 				},
 				success: function () {
 					console.log("삭제완료");
-					event.target.parentNode.remove();
+					e.target.parentNode.remove();
+					location.reload();
 				},
-				error: function () {
-					conosle.log(error);
+				error: function (request, status, error) {
+					console.log(error);
 				}
 			})
 		}
@@ -182,33 +186,42 @@
 
 		}
 	</script>
+
 	<title>lookBoard</title>
+	<style>
+		div {
+			display: inline-block;
+			padding-right: 30px;
+		}
+	</style>
 
 <body>
 	<c:import url="../header.jsp"></c:import>
-	<jsp:include page="../nav.jsp"></jsp:include>
 
 	<% BoardVO vo = (BoardVO) request.getAttribute("boardData"); %>
+	<div>
 	<form action="../boardServlet/updateBoard.do" method="post">
-
-		<input type='text' name='header' value=<%=vo.getBoardHeader() %>>
+	제목<br>
+		<input type='text' name='header' value=<%=vo.getBoardHeader() %>><br>
 		<!-- 아래 내용 세션으로 바꿔야함. -->
-		<input type='text' name='memberId' value=<%=vo.getMemberId() %> readonly>
+		작성자<br>
+		<input type='text' name='memberId' value=<%=vo.getMemberId() %> readonly><br>
 		<input type="hidden" name='boardId' id='board' value=<%=vo.getBoardId()%>>
-		<textarea rows="30" cols="50" name='content'><%=vo.getBoardContent() %></textarea>
+		내용<br>
+		<textarea  rows=8" cols="50"  name='content'><%=vo.getBoardContent() %></textarea><br>
 		<input type='submit' value="수정">
 		<input type='button' value="삭제" id='delbtn' onclick='deleteBoard("<%=vo.getBoardId()%>")'>
 	</form>
 
 	<div id="comment">
-		<p>댓글</p>
+		<p>댓글 추가</p>
 		<input type="text" id="addComm">
 		<button onclick="addComm('<%=vo.getBoardId()%>')">+</button>
 	</div>
 	<hr>
 	<div id="showComm">
-	</div>
-
+	</div><br>
+</div>
 
 
 </body>

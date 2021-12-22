@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!-- jstl사용을 위해 추가 -->
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="board.css">
 
 <head>
 	<meta charset="UTF-8">
@@ -19,8 +20,8 @@
 			$.ajax({
 				method: 'get',
 				url: '../boardServlet',
-				data:{
-					cmd:'select'
+				data: {
+					cmd: 'select'
 				},
 				dataType: 'json',
 				success: successFnc,
@@ -54,9 +55,10 @@
 				form.attr('action', '../boardServlet/showBoard.do');
 				form.attr('method', 'post');
 				form.appendTo('body');
-				var no = $("<input type='hidden' value=" + event.target.parentNode.children[0].textContent + " name='no'>");
+				var no = $("<input type='hidden' value=" + event.target.parentNode.children[0].textContent +
+					" name='no'>");
 				form.append(no);
-			
+
 				form.submit();
 
 
@@ -75,13 +77,35 @@
 			}
 		});
 	</script>
+	<style>
+		.mainBoard {
+			display: inline-block;
+			width: 90%;
+			position: relative;
+			top: -220px;
+			padding: 0px 5px 10px 5px;
+		}
+
+		.tbl {
+			width: 98%;
+			text-align: center;
+			right: 25px;
+		}
+
+		button {
+			float: right;
+			margin-right:30px;
+			margin-bottom: 10px;
+		}
+	</style>
 </head>
 
 <body>
 	<c:import url="../header.jsp"></c:import>
-	<jsp:include page="../nav.jsp"></jsp:include>
-	<div>
-		<table border="1">
+	<div class="mainBoard">
+		<h3>게시판</h3>
+		<button onclick="location.href='insertBoard.jsp'">등록</button>
+		<table border="1" class="tbl">
 			<thead>
 				<tr>
 					<th>No.</th>
@@ -92,8 +116,8 @@
 			<tbody class="showList">
 			</tbody>
 		</table>
-		<button onclick="location.href='insertBoard.jsp'">등록</button>
-	</div>	
+
+	</div>
 </body>
 
 </html>

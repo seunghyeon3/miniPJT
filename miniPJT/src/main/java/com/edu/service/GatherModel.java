@@ -61,8 +61,8 @@ public class GatherModel {
 		cDAO.updateComment(vo);
 	}
 	
-	public void deleteComment(int id) {
-		cDAO.deleteComment(id);
+	public void deleteComment(int commId, int boardId) {
+		cDAO.deleteComment(commId, boardId);
 	}
 	
 	//3. member(멤버) DAO 영역

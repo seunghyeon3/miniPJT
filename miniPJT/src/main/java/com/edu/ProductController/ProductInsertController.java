@@ -32,14 +32,12 @@ public class ProductInsertController implements Controller {
 		String product_eval_Point = mRequset.getParameter("product_eval_Point");
 
 		ProductVO vo = new ProductVO();
-<<<<<<< HEAD
 		//vo.setProduct_id(product_id); // 상품아이디
 		vo.setProduct_content(product_content); // 상품설명
 		//vo.setProduct_eval(product_eval); // 상품평점
 		vo.setProduct_name(product_name); // 상품명
 		vo.setProduct_picture(product_picture); // 사진
 		//vo.setProduct_price(product_price); // 가격
-=======
 		vo.setProduct_id(product_id);
 		vo.setProduct_name(product_name);
 		vo.setProduct_price(Integer.parseInt(product_price));
@@ -50,7 +48,6 @@ public class ProductInsertController implements Controller {
 		// 입력처리
 		GatherModel.getInstance().productInsert(vo);
 		
->>>>>>> 83bce4341f3b5d0a29ef78029a4fcb04e38504d2
 
 		res.sendRedirect("../product/productOutput.jsp");
 

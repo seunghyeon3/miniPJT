@@ -27,7 +27,7 @@ public class CommentServlet extends HttpServlet {
 	HashMap<String, Controller> list = null;
 
 	// 싱글톤(싱글톤 객체로 gatherModel 쓰면 됨)
-	GatherModel getBoard = GatherModel.getInstance();
+	GatherModel getModel = GatherModel.getInstance();
 
 	public CommentServlet() {
 		super();
@@ -53,9 +53,8 @@ public class CommentServlet extends HttpServlet {
 		if (cmd == null) {
 			cmd = "a";
 		}
-
 		if (cmd.equals("comment")) {
-			List<CommentVO> commentList = getBoard.getOneComment(boardId);
+			List<CommentVO> commentList = getModel.getOneComment(boardId);
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			res.getWriter().print(gson.toJson(commentList).toString());
 		}
@@ -64,25 +63,31 @@ public class CommentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		String cmd = req.getParameter("cmd");
-		Controller subCont = null;
-
+		//filter json 이라 재정의
+		res.setContentType("text/html;charset=utf-8");
 		// cmd null일떄 예외처리 방식 재정의
 		if (cmd == null) {
 			cmd = "a";
 		}
-		System.out.println("이까지들어옴");
 		//JSONObject obj = new JSONObject();
 		
 		if (cmd.equals("delete")) {
-			subCont = list.get("/CommentServlet/deleteBoard.do");
-			subCont.execute(req, res);
-		} else if (cmd.equals("modify")) {
-			subCont = list.get("/CommentServlet/deleteBoard.do");
-			subCont.execute(req, res);
-		} else if (cmd.equals("insert")) {
 			
-			//filter json 이라 재정의 
-			res.setContentType("text/html;charset=utf-8");
+			int commId = Integer.parseInt(req.getParameter("commId"));
+			int boardId = Integer.parseInt(req.getParameter("boardId"));
+			
+			getModel.deleteComment(commId, boardId);
+		
+		} else if (cmd.equals("modify")) {
+			CommentVO vo = new CommentVO();
+			vo.setBoardId(Integer.parseInt(req.getParameter("boardId")));
+			vo.setCommentId(Integer.parseInt(req.getParameter("commId")));
+			vo.setCommentContent(req.getParameter("commVal"));
+			vo.setMemberId("A");
+			System.out.println(vo);
+			getModel.updateComment(vo);			
+			
+		} else if (cmd.equals("insert")) {
 
 			String commData = req.getParameter("commdata");
 			int boardId = Integer.parseInt(req.getParameter("boardId"));
@@ -91,7 +96,7 @@ public class CommentServlet extends HttpServlet {
 			vo.setBoardId(boardId);
 			//테스트용
 			vo.setMemberId("A");
-			GatherModel getModel = GatherModel.getInstance();
+		
 			getModel.insertComment(vo);
 		}
 

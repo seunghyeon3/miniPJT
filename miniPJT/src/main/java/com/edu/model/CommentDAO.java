@@ -81,7 +81,6 @@ public class CommentDAO extends DAO {
 			if (rs.next()) {
 				count = rs.getInt(1) + 1;
 			}
-			System.out.println(vo);
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, count);
 			psmt.setString(2, vo.getCommentContent());
@@ -99,7 +98,7 @@ public class CommentDAO extends DAO {
 
 	// 수정
 	public void updateComment(CommentVO vo) {
-		String sql = "update comments set comment_content = ? where board_id =? and member_id = ? and comment_id = ?";
+		String sql = "update comments set comment_content = ? where board_id =? and comment_id = ?";
 
 		connect();
 
@@ -107,8 +106,7 @@ public class CommentDAO extends DAO {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getCommentContent());
 			psmt.setInt(2, vo.getBoardId());
-			psmt.setString(3, vo.getMemberId());
-			psmt.setInt(4, vo.getCommentId());
+			psmt.setInt(3, vo.getCommentId());
 
 			int r = psmt.executeUpdate();
 			System.out.println(r + " 건 수정 완료");
@@ -120,14 +118,15 @@ public class CommentDAO extends DAO {
 	}
 
 	// 삭제
-	public void deleteComment(int id) {
-		String sql = "delete from comments where comment_id = ?";
+	public void deleteComment(int commId, int boardId) {
+		String sql = "delete from comments where comment_id = ? and board_id=?";
 
 		connect();
 
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, id);
+			psmt.setInt(1, commId);
+			psmt.setInt(2, boardId);
 			int r = psmt.executeUpdate();
 
 			System.out.println(r + " 건 삭제 완료");

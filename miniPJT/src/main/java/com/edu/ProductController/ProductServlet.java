@@ -1,13 +1,6 @@
 package com.edu.ProductController;
 
 import java.io.IOException;
-<<<<<<< HEAD
-=======
-
-import java.util.Enumeration;
-import java.util.HashMap;
-
->>>>>>> 83bce4341f3b5d0a29ef78029a4fcb04e38504d2
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -21,12 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< HEAD
-
-=======
-import com.edu.controller.Controller;
-import com.edu.service.GatherModel;
->>>>>>> 83bce4341f3b5d0a29ef78029a4fcb04e38504d2
 import com.edu.VO.ProductVO;
 import com.edu.controller.Controller;
 import com.edu.service.GatherModel;
@@ -54,14 +41,6 @@ public class ProductServlet extends HttpServlet {
 		list = new HashMap<String, Controller>();
 		// 상품 입력
 		list.put("/productServlet/productInsert.do", new ProductInsertController());
-<<<<<<< HEAD
-		//전체상품화면
-		//list.put("/productServlet/productShow.do", new ProductShowController());
-		//상품삭제
-		//list.put("/productServlet/productDelete.do", new ProductDeleteController());
-		//상품수정
-		//list.put("/productServlet/productUpdate.do", new ProductUpdateController());
-=======
 
 		//상품 조회
 		list.put("/productServlet/productSearch.do", new ProductSearchConroller());
@@ -70,7 +49,6 @@ public class ProductServlet extends HttpServlet {
 		// 상품 수정
 		list.put("/productServlet/productUpdate.do", new ProductUpdateController());
 		
->>>>>>> 83bce4341f3b5d0a29ef78029a4fcb04e38504d2
 	}
 
 
