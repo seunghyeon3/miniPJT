@@ -16,9 +16,9 @@ public class MemberListController implements Controller {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		GatherModel getmember = new GatherModel();
-		List<MemberVO> list = getmember.searchAll();
+		//List<MemberVO> list = getmember.searchAll();
 		
-		req.setAttribute("memberList", list);
+		//req.setAttribute("memberList", list);
 		
 		req.getRequestDispatcher("member/memberList.jsp").forward(req, res);
 

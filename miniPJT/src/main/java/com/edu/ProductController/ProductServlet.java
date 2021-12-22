@@ -1,15 +1,10 @@
 package com.edu.ProductController;
 
 import java.io.IOException;
-<<<<<<< HEAD
-import java.util.Enumeration;
-import java.util.HashMap;
-=======
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
->>>>>>> 4f2639b949b4c36ad331cd6d9ea9d05770da506f
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,16 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< HEAD
-import com.edu.controller.Controller;
-import com.edu.service.GatherModel;
-=======
+
 import com.edu.VO.ProductVO;
 import com.edu.controller.Controller;
 import com.edu.service.GatherModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
->>>>>>> 4f2639b949b4c36ad331cd6d9ea9d05770da506f
 import com.google.gson.JsonObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -56,7 +47,7 @@ public class ProductServlet extends HttpServlet {
 		//입력
 		list.put("/productServlet/productInsert.do", new ProductInsertController());
 		//전체상품화면
-		list.put("/productServlet/productShow.do", new ProductShowController());
+		//list.put("/productServlet/productShow.do", new ProductShowController());
 		//상품삭제
 		//list.put("/productServlet/productDelete.do", new ProductDeleteController());
 		//상품수정
@@ -125,24 +116,24 @@ public class ProductServlet extends HttpServlet {
 		}
 		String uri = request.getRequestURI();
 		System.out.println(uri);
-		String context = request.getContextPath();
-		System.out.println(context);
-
-		int toPos = uri.indexOf(".do");
-		Controller subCont = null;
-		if(toPos > 0) {
-			String path = uri.substring(context.length(), toPos + 3);
-			System.out.println(path);
-			subCont = list.get(path);
-		}else {
-			String path = uri.substring(context.length());
-			System.out.println(path);
-			subCont = list.get(path);
-		}
-		
-		//String path2 = uri.substring(context.length()); 동일함		
-		subCont.execute(request, response);
-		         
+//		String context = request.getContextPath();
+//		System.out.println(context);
+//
+//		int toPos = uri.indexOf(".do");
+//		Controller subCont = null;
+//		if(toPos > 0) {
+//			String path = uri.substring(context.length(), toPos + 3);
+//			System.out.println(path);
+//			subCont = list.get(path);
+//		}else {
+//			String path = uri.substring(context.length());
+//			System.out.println(path);
+//			subCont = list.get(path);
+//		}
+//		
+//		//String path2 = uri.substring(context.length()); 동일함		
+//		subCont.execute(request, response);
+//		         
 		
 		}
 		

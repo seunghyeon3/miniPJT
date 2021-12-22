@@ -15,11 +15,11 @@
 		$(document).ready(function () {
 			$.ajax({
 				method: 'get',
-				url: '../boardServlet',
+				url: '../CommentServlet',
 				data: {
-					cmd: 'comment'
+					cmd: 'comment',
+					boardId : $('#board').val()
 				},
-				dataType: 'json',
 				success: commentCall,
 				error: function (error) {
 					console.log(error);
@@ -29,65 +29,86 @@
 			function commentCall(result) {
 				//result 결과보고 comment 출력하면됨.
 				var comm = $('#showComm');
-
-				result.forEach(item => {
-						if (result != null && (item.memberId == sessionStorage.getItem("member_Id"))) {
+				if (result.length > 0) {
+					result.forEach(item => {
+						// if (result != null && (item.memberId == sessionStorage.getItem("member_Id"))) {
+						// 	comm.append(
+						// 		$('<div>').attr('id', item.commentID).append(
+						// 			$('<input>').attr('type', 'hidden').val(item.memberId),
+						// 			$('<input>').text(item.commentContent),
+						// 			$('<button>').val('수정').attr('click', modifyCommFnc(event)),
+						// 			$('<button>').val('삭제').attr('click',  deleteCommFnc(event))
+						// 		)
+						// 	);
+						// } else if (result != null && (item.memberId != sessionStorage.getItem("member_Id"))) {
+						// 	comm.append(
+						// 		$('<div>').attr('id', item.commentID).append(
+						// 			$('<input>').attr('type', 'hidden').val(item.memberId),
+						// 			$('<input>').text(item.commentContent),
+						// 			$('<button>').val('수정').attr('click', modifyCommFnc(event)).hide(),
+						// 			$('<button>').val('삭제').attr('click', deleteCommFnc(event)).hide()
+						// 		)
+						// 	);
+						// } else {
+						// 	comm.append(
+						// 		$('<p>').text("등록 된 댓글이 없습니다.")
+						// 	)
+						// }
+						if ($('#board').val() == item.boardId) {
 							comm.append(
-								$('<div>').attr('id', item.commentID).append(
-									$('<input>').attr('type', 'hidden').val(item.memberId),
-									$('<input>').text(item.commentContent),
-									$('<button>').val('수정').attr('click', modifyCommFnc(event)),
-									$('<button>').val('삭제').attr('click',  deleteCommFnc(event))
+								$('<div>').attr('id', item.commentId).append(
+									$('<input>').attr({
+										type: 'hidden',
+										id: 'memberid'
+									}).val(item.memberId),
+									$('<input>').attr({
+										type: 'hidden',
+										id: 'boardid'
+									}).val(item.boardId),
+									$('<input>').val(item.commentContent),
+									$('<button>').text('수정').click(modifyCommFnc),
+									$('<button>').text('삭제').click(deleteCommFnc)
 								)
 							);
-						} else if (result != null && (item.memberId != sessionStorage.getItem("member_Id"))) {
-							comm.append(
-								$('<div>').attr('id', item.commentID).append(
-									$('<input>').attr('type', 'hidden').val(item.memberId),
-									$('<input>').text(item.commentContent),
-									$('<button>').val('수정').attr('click', modifyCommFnc(event)).hide(),
-									$('<button>').val('삭제').attr('click', deleteCommFnc(event)).hide()
-								)
-							);
-						} else {
-							comm.append(
-								$('<p>').text("등록 된 댓글이 없습니다.")
-							)
 						}
+
 					});
-					//아래 내용 참고하여 작성하면됨.
-					//버튼 이벤트까지만 걸어주면끝
+				} else {
+					comm.append($('<p>').text('등록된 댓글이 없습니다.'));
+				}
+			};
+			//아래 내용 참고하여 작성하면됨.
+			//버튼 이벤트까지만 걸어주면끝
 
-					// let tbd = $('.showList');
-					// 	result.forEach(item => {
-					// 		let tr = $('<tr>').on("click", viewList).hover(function () {
-					// 			$(this).css('color', 'red');
-					// 		}, function () {
-					// 			$(this).css('color', 'black');
-					// 		});
-					// 		for (let field in item) {
-					// 			if (field != 'boardHeader') {
-					// 				let td = $('<td>').text(item[field])
-					// 				tr.append(td)
-					// 			}
-					// 		}
-					// 		tbd.append(tr);
-					// 	})
+			// let tbd = $('.showList');
+			// 	result.forEach(item => {
+			// 		let tr = $('<tr>').on("click", viewList).hover(function () {
+			// 			$(this).css('color', 'red');
+			// 		}, function () {
+			// 			$(this).css('color', 'black');
+			// 		});
+			// 		for (let field in item) {
+			// 			if (field != 'boardHeader') {
+			// 				let td = $('<td>').text(item[field])
+			// 				tr.append(td)
+			// 			}
+			// 		}
+			// 		tbd.append(tr);
+			// 	})
 
-			}
 		});
 
 		function modifyCommFnc(event) {
-			console.log(event.target);
-			let commentId = event.target.parentNode.textContent;
-			let commentValue = event.target.parentNode.children[2].textContent;
+			//수정중
+			console.log(document.querySelector("#\\31  > input:nth-child(3)").textContent);
+			//let commentValue = document.querySelector("#\\31  > input:nth-child(3)").textContent;
 			let boardID = $('#board').val();
 			$.ajax({
 				method: 'post',
 				url: '../CommentServlet',
 				data: {
 					cmd: 'modify',
-					commId: commentId,
+					commId: commentNo,
 					commVal: commentValue,
 					boardId: boardID
 				},
@@ -101,14 +122,13 @@
 			})
 		}
 
-		function deleteCommFnc(event) {
-			let commentId = event.target.parentNode.textContent;
+		function deleteCommFnc(commentNo) {
 			$.ajax({
 				method: 'post',
 				url: '../CommentServlet',
 				data: {
 					cmd: 'delete',
-					commId: commentId
+					commId: commentNo
 				},
 				success: function () {
 					console.log("삭제완료");
@@ -139,8 +159,7 @@
 		}
 
 		function addComm(boardId) {
-
-			console.log($('#addComm').val())
+			console.log(window.location.pathname);
 			$.ajax({
 				method: 'post',
 				url: '../CommentServlet',
@@ -153,8 +172,10 @@
 					// result에 retCode 추가 해보기
 					location.reload();
 				},
-				error: function (error) {
-					console.log(error);
+				error: function (request, status, error) {
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" +
+						error);
+
 				}
 
 			});

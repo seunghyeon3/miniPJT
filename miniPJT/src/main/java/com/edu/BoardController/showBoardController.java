@@ -14,7 +14,7 @@ public class showBoardController implements Controller {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
+
 		int data = Integer.parseInt(req.getParameter("no"));
 		
 		GatherModel getBoard = GatherModel.getInstance();
@@ -26,7 +26,6 @@ public class showBoardController implements Controller {
 		req.setAttribute("boardData", vo);
 		
 		req.getRequestDispatcher("/board/contentBoard.jsp").forward(req, res);
-
 	}
 
 }

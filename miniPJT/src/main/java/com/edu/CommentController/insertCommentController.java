@@ -22,8 +22,7 @@ public class insertCommentController implements Controller {
 
 		String commData = req.getParameter("commdata");
 		int boardId = Integer.parseInt(req.getParameter("boardId"));
-		HttpSession session = req.getSession();
-		
+
 		CommentVO vo = new CommentVO();
 		vo.setCommentContent(commData);
 		vo.setBoardId(boardId);
@@ -32,9 +31,9 @@ public class insertCommentController implements Controller {
 		//vo.setMemberId((String)session.getAttribute("member_id"));
 		GatherModel getModel = GatherModel.getInstance();
 		getModel.insertComment(vo);
-		
-		res.sendRedirect("../board/contentBoard.jsp");
-		//req.getRequestDispatcher("../board/contentBoard.jsp").forward(req, res);
+		//req.setAttribute("cmd", "comment");
+		//res.sendRedirect("/miniPJT/boardServlet/showBoard.do?cmd=comment");
+		//req.getRequestDispatcher("/miniPJT/boardServlet/showBoard.do").forward(req, res);
 	}
 
 }

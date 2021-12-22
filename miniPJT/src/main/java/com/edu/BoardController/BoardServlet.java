@@ -76,9 +76,7 @@ public class BoardServlet extends HttpServlet {
 			cmd = "a";
 		}
 		String uri = req.getRequestURI();
-		System.out.println(uri);
 		String context = req.getContextPath();
-		System.out.println(context);
 		
 		String temp = req.getParameter("writer");
 		System.out.println(temp);
@@ -89,16 +87,13 @@ public class BoardServlet extends HttpServlet {
 		Controller subCont = null;
 		if(toPos > 0) {
 			String path = uri.substring(context.length(), toPos + 3);
-			System.out.println(path);
 			subCont = list.get(path);
 		}else {
 			String path = uri.substring(context.length());
-			System.out.println(path);
 			subCont = list.get(path);
 		}
 		
 		//String path2 = uri.substring(context.length()); 동일함		
-		System.out.println(cmd);
 		if(cmd.equals("delete")) {
 			subCont = list.get("/boardServlet/deleteBoard.do");
 		}

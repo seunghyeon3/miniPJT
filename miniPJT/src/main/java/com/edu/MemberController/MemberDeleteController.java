@@ -17,7 +17,7 @@ public class MemberDeleteController implements Controller {
 		
 		// 삭제 
 		GatherModel getmember = new GatherModel();
-		getmember.delet(memberId);
+		//getmember.delet(memberId);
 		
 		res.sendRedirect("main.jsp");
 		

@@ -50,6 +50,9 @@ public class GatherModel {
 		return cDAO.getComment();
 	}
 	
+	public List<CommentVO> getOneComment(int id){
+		return cDAO.getOneComment(id);
+	}
 	public void insertComment(CommentVO vo) {
 		cDAO.insertComment(vo);
 	}
