@@ -21,8 +21,8 @@ public class ProductDAO extends DAO{
 			psmt.setInt(2, vo.getProduct_price());
 			psmt.setString(3, vo.getProduct_content());
 			psmt.setString(4, vo.getProduct_picture());
-			psmt.setInt(5, vo.getProduct_id());
-			psmt.setDouble(6, vo.getProduct_eval());
+			psmt.setString(5, vo.getProduct_id());
+			psmt.setDouble(6, vo.getProduct_eval_Point());
 			int r = psmt.executeUpdate();
 			System.out.println(r + "건 입력.");
 		} catch (SQLException e) {
@@ -34,7 +34,7 @@ public class ProductDAO extends DAO{
 	}
 	
 	//전체 조회
-	public List<ProductVO> getProduct(){
+	public List<ProductVO> listProduct(){
 		
 		String sql = "select * from product order by 1";
 		connect();
@@ -45,9 +45,9 @@ public class ProductDAO extends DAO{
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
-				vo.setProduct_id(rs.getInt("product_id"));
+				vo.setProduct_id(rs.getString("product_id"));
 				vo.setProduct_content(rs.getString("product_content"));
-				vo.setProduct_eval(rs.getDouble("product_eval_point"));
+				vo.setProduct_eval_Point(rs.getDouble("product_eval_Point"));
 				vo.setProduct_name(rs.getString("product_name"));
 				vo.setProduct_price(rs.getInt("product_price"));
 				vo.setProduct_picture(rs.getString("product_picture"));	
@@ -64,33 +64,73 @@ public class ProductDAO extends DAO{
 		
 		return null;
 	}
-	
-	//단건 조회
-	
-	
+
 	//수정
-//	public MemberVO memberUpdate(MemberVO vo) {
-//		String sql = "update product set member_id = ?, member_pw = ?, member_name = ?, member_Email = ? , member_nick_name = ?,member_phone, member_addr, addmin";
-//		connect();
-//		try {
-//			psmt = conn.prepareStatement(sql);
-//			psmt.setString(1, vo.getMemberId());
-//			psmt.setString(2, vo.getMemberPw());
-//			psmt.setString(3, vo.getMemberdName());
-//			psmt.setString(4, vo.getMemberEmail());
-//			psmt.setString(5, vo.getMemberNickName());
-//			psmt.setString(5, vo.getMemberPhone());
-//			psmt.setString(6, vo.getMemberPhone());
-//			psmt.setString(7, vo.getMemberAddr());
-//			psmt.setString(8, vo.getAdmin());
-//		} catch (SQLException e) {
-//
-//			e.printStackTrace();
-//		} finally {
-//			disconnect();
-//		}
-//
-//		return vo;
-//
-//	}
+	public ProductVO updateProduct(ProductVO vo) {
+		String sql = "update product set product_name = nvl(?,product_name),product_price = nvl(?,product_price),product_content = nvl(?,product_content),product_price = nvl(?,product_price),product_eval_Point = nvl(?,product_eval_Point)where product_id = ?";
+	    connect();
+	    try {
+	      psmt = conn.prepareStatement(sql);
+	      psmt.setString(1, vo.getProduct_name());
+	      psmt.setInt(2, vo.getProduct_price());
+	      psmt.setInt(3, vo.getProduct_price());
+	      psmt.setString(4, vo.getProduct_content());
+	      psmt.setDouble(5, vo.getProduct_eval_Point());
+	      psmt.setString(6, vo.getProduct_id());
+	      int r = psmt.executeUpdate();
+	      System.out.println(String.valueOf(r) + "건 수정완료");
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	    } finally {
+	      disconnect();
+	    } 
+	    return vo;
+	}
+
+	//단건조회
+	public ProductVO prdocutSearch(String product_id) {
+		String sql = "select * from product where product_id = ?";
+	    connect();
+	    try {
+	      psmt = conn.prepareStatement(sql);
+	      psmt.setString(1, product_id);
+	      rs = psmt.executeQuery();
+	      if (rs.next()) {
+	        ProductVO vo = new ProductVO();
+	        vo.setProduct_id(rs.getString("product_id"));
+	        vo.setProduct_content(rs.getString("product_content"));
+			vo.setProduct_eval_Point(rs.getDouble("product_eval_Point"));
+			vo.setProduct_name(rs.getString("product_name"));
+			vo.setProduct_price(rs.getInt("product_price"));
+			vo.setProduct_picture(rs.getString("product_picture"));	
+	        return vo;
+	      } 
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	    } finally {
+	      disconnect();
+	    } 
+	    return null;
+	  }
+
+	
+		public ProductVO deleteProduct(String product_id) {
+		    ProductVO vo = prdocutSearch(product_id);
+		    String sql = "delete from product where product_id = ?";
+		    connect();
+		    try {
+		      psmt = conn.prepareStatement(sql);
+		      psmt.setString(1, product_id);
+		      int r = psmt.executeUpdate();
+		      System.out.println(String.valueOf(r) + "건 삭제완료");
+		    } catch (SQLException e) {
+		      e.printStackTrace();
+		    } finally {
+		      disconnect();
+		    } 
+		    return vo;
+		  }
+
+
+	
 }
