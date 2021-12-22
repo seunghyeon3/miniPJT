@@ -1,6 +1,8 @@
 package com.edu.service;
 
 
+import com.edu.VO.MemberVO;
+
 import java.util.List;
 
 import com.edu.VO.BoardVO;
@@ -46,6 +48,18 @@ public class GatherModel {
 	//2. comment(댓글) DAO 영역
 	public List<CommentVO> getComment(){
 		return cDAO.getComment();
+	}
+	
+	public void insertComment(CommentVO vo) {
+		cDAO.insertComment(vo);
+	}
+	
+	public void updateComment(CommentVO vo) {
+		cDAO.updateComment(vo);
+	}
+	
+	public void deleteComment(int id) {
+		cDAO.deleteComment(id);
 	}
 	
 	//3. member(멤버) DAO 영역

@@ -24,14 +24,15 @@ public class FrontController extends HttpServlet{
 	public void init() throws ServletException {
 		list = new HashMap<String, Controller>();
 		//list.put("/productInsert.do", new ProductInsertController());
+
 		list.put("logout.do", new logoutController());
 		list.put("mypage.do", new mypageController());
+
 		
 	}
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		String url = req.getRequestURI();
 		String context = req.getContextPath(); 
 		String path = url.substring(context.length()); 

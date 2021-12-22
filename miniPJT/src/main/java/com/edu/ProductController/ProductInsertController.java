@@ -17,12 +17,18 @@ public class ProductInsertController implements Controller {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
+		String saveUrl = req.getRealPath("/upload");
+		int maxSize = 30 * 1024 * 1024;
+		String encoding = "UTF-8";
+		MultipartRequest mRequset = new MultipartRequest(req, saveUrl, maxSize, encoding,
+				new DefaultFileRenamePolicy());
+
 		String product_name = req.getParameter("product_name");
-		int product_price = Integer.parseInt(req.getParameter("product_price"));
+		String product_price = req.getParameter("product_price");
 		String product_picture = req.getParameter("product_picture");
 		String product_content = req.getParameter("product_content");
-		int product_id = Integer.parseInt(req.getParameter("product_id"));
-		double product_eval = Double.valueOf(req.getParameter("product_eval"));
+		String product_id = req.getParameter("product_id");
+		String product_eval = req.getParameter("product_eval");
 		
 		ProductVO vo = new ProductVO();
 		vo.setProduct_id(product_id); // 상품아이디
@@ -33,6 +39,11 @@ public class ProductInsertController implements Controller {
 		vo.setProduct_price(product_price); // 가격
 
 		GatherModel.getInstance().insertProduct(vo);
+		req.setAttribute("product", vo);
+
+		req.getRequestDispatcher("product/productOutput.jsp").forward(req, res);
+		
+
 		
 		
 		/*

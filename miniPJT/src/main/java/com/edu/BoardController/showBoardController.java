@@ -22,8 +22,7 @@ public class showBoardController implements Controller {
 		
 		BoardVO vo =  getBoard.getOneBoard(data);
 		
-		
-		
+
 		req.setAttribute("boardData", vo);
 		
 		req.getRequestDispatcher("/board/contentBoard.jsp").forward(req, res);
