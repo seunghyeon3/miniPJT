@@ -1,3 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="com.edu.VO.ProductVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,6 +13,7 @@
 <jsp:include page="../nav.jsp"></jsp:include>
 <form action='../productServlet/productUpdate.do' name="registerProduct"
 			enctype="multipart/form-data" method='post'>
+			
 		상품코드 : <input type="hidden" name='product_id' value='${product.product_id }'>${product.product_id }<br>
 		상품명 : <input type='text' name='product_name' value='${product.product_name }'><br> 
 		상품가격 : <input type="number" name='product_price' value='${product.product_price }'><br>
